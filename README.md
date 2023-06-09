@@ -1,34 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is an example set up for the technologies used for COMP3900 group project.
 
-## Getting Started
+# The Stack
 
-First, run the development server:
+The technologies used are as follows:
+- Next.js 13 (app directory)
+- tRPC
+- Zod for schema validation
+- Prisma for a database ORM
+- React Query
+- Zustand for state management
+- classnames for CSS utility
+- Headless UI/Radix UI for UI components
+- Lucide Icons
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Next.js 13 (app directory)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Why
+I don't know, I just picked this because theres hype around it. I don't really get its improvements over v12 apart from maybe smaller bundle sizes. We won't be using the native server api endpoints and will instead be using tRPC.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Resources
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[Documentation](https://nextjs.org/docs)
 
-## Learn More
+Video Guides:
+- [ Next.js 13 - The Basics ](https://www.youtube.com/watch?v=__mSgDEOyv8)
+- [ Next.js App Router: Routing, Data Fetching, Caching ](https://www.youtube.com/watch?v=gSSsZReIFRk)
+- [ Learn Next.js 13 With This One Project ](https://www.youtube.com/watch?v=NgayZAuTgwM)
+  - This one is not necessary but has some other interesting features for Next.js 13
 
-To learn more about Next.js, take a look at the following resources:
+## tRPC
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Why
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+tRPC is a really great tool to make your routes type safe. It makes it so that the body data of your API requests are typed and provides autocompletion for your routes too. Think of it as the alternative for fetch requests. Instead of making a `fetch()` call and sending an untyped JSON object as the data payload, you call a function directly in the frontend and pass the data as a typed object. tRPC will raise an error if your object and its fields are of the wrong type.
+### Resources
 
-## Deploy on Vercel
+[Documentation](https://trpc.io/docs/getting-started)  
+[Video Guide](https://www.youtube.com/watch?v=UfUbBWIFdJs)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Zod
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Why
+
+We use Zod with tRPC to validate the object argument we give to our tRPC route.
+
+### Resources
+
+[Documentation](https://zod.dev/)
+
+Video Guides:
+- [Learn Zod in 30 minutes](https://www.youtube.com/watch?v=L6BE-U3oy80)
+  - This one is really all you need
+- [ Zod Goes Where TypeScript Can't ](https://www.youtube.com/watch?v=o4h8PUVy5J8)
+- [ Blazing Fast Tips: Build ANYTHING with Zod + Generics ](https://www.youtube.com/watch?v=9N50YV5NHaE)
+
+## Prisma
+
+### Why
+Similar to tRPC, Prisma gives us type safety and auto complete when interacting with our database. Using consists of calling methods on an object corelating to the table schema you are trying to query/mutate. It consists of its own schema language. You should download the Prisma VSCode Extension for it.
+
+### Resources
+
+[Documentation](https://www.prisma.io/docs)  
+[Video Guide](https://www.youtube.com/watch?v=E37-33M6Ypk)
+
+## React Query
+
+### Why
+React Query is a really great wrapper around your interactions between the client and the server because it provides things like refetching, caching (best part), request state and more.
+
+### Resources
+
+[Documentation](https://tanstack.com/query/v4/docs/react/overview)  
+[Video Guide](https://www.youtube.com/watch?v=r8Dg0KVnfMA)
+
