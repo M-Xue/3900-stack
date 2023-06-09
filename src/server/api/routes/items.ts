@@ -1,14 +1,12 @@
 import { publicProcedure, router } from '../trpc';
 import { z } from 'zod';
 import { v4 as uuidv4 } from 'uuid';
-import { PrismaClient } from '@prisma/client';
 
 export const itemRouter = router({
 	getItem: publicProcedure
 		.input(z.object({ itemId: z.string() }))
-		.query(async ({ input }) => {
-			const prisma = new PrismaClient();
-			const item = await prisma.item.findFirstOrThrow({
+		.query(async ({ ctx, input }) => {
+			const item = await ctx.prisma.item.findFirstOrThrow({
 				where: {
 					id: input.itemId,
 				},
@@ -16,16 +14,14 @@ export const itemRouter = router({
 
 			return item;
 		}),
-	getItems: publicProcedure.query(async (a) => {
-		const prisma = new PrismaClient();
-		const items = await prisma.item.findMany();
+	getItems: publicProcedure.query(async ({ ctx }) => {
+		const items = await ctx.prisma.item.findMany();
 		return items;
 	}),
 	createItem: publicProcedure
 		.input(z.object({ title: z.string() }))
-		.mutation(async ({ input }) => {
-			const prisma = new PrismaClient();
-			const item = await prisma.item.create({
+		.mutation(async ({ ctx, input }) => {
+			const item = await ctx.prisma.item.create({
 				data: {
 					id: uuidv4(),
 					title: input.title,
@@ -36,9 +32,8 @@ export const itemRouter = router({
 		}),
 	deleteItem: publicProcedure
 		.input(z.object({ id: z.string() }))
-		.mutation(async ({ input }) => {
-			const prisma = new PrismaClient();
-			const item = await prisma.item.delete({
+		.mutation(async ({ ctx, input }) => {
+			const item = await ctx.prisma.item.delete({
 				where: {
 					id: input.id,
 				},
