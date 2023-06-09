@@ -55,4 +55,26 @@
   padding: 15px;
   margin-bottom: 8px;
   font-size: 14px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.x-card {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+
+  border-radius: 4px;
+  background-color: transparent;
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.x-card:hover {
+  background-color: rgba(0, 0, 0, 0.08);
 }

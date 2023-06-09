@@ -1,4 +1,4 @@
-import { TrpcProvider } from '../utils/trpc-provider';
+import { TrpcProvider } from '../../utils/trpc-provider';
 import './globals.css';
 import { Inter } from 'next/font/google';
 

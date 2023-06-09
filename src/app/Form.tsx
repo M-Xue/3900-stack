@@ -1,27 +1,29 @@
 'use client';
 
-import { ItemType } from '@/types/types';
 import React, { ChangeEvent, useState } from 'react';
 import styles from './page.module.css';
-import { v4 as uuidv4 } from 'uuid';
+import { trpc } from '@/utils/trpc';
+import { useQueryClient } from '@tanstack/react-query';
 
-export default function Form({
-	addItem,
-}: {
-	addItem: (newItem: ItemType) => void;
-}) {
+export default function Form() {
 	const [input, setInput] = useState<string>('');
+	const queryClient = useQueryClient();
+
+	const createItemMutation = trpc.items.createItem.useMutation({
+		onSuccess: () =>
+			queryClient.invalidateQueries({
+				queryKey: [['items', 'getItems'], { type: 'query' }],
+				exact: true,
+			}),
+	});
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (input === '') return;
-		const newItem: ItemType = {
-			id: uuidv4(),
-			title: input,
-		};
-		addItem(newItem);
+		createItemMutation.mutate({ title: input });
 		setInput('');
 	};
+
 	return (
 		<form action='' onSubmit={handleSubmit} autoComplete='off'>
 			<label htmlFor='input'>
